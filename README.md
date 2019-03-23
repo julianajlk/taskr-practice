@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+TASKR is an app to add your daily tasks - this project is a React practice project.
+
 ## Available Scripts
 
 In the project directory, you can run:

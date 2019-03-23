@@ -1,32 +1,53 @@
-.App {
-  text-align: center;
-}
+/* FONTS */
+@import url("https://fonts.googleapis.com/css?family=Niramit:500,700");
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  font-family: "Niramit", sans-serif;
+  letter-spacing: 0.3em;
+  line-height: 2.5em;
+  padding-bottom: 0.3em;
+  padding-left: 1em;
+  margin-bottom: 1em;
+  margin-top: 0;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #95c5ec;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header a {
+  text-decoration: none;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  text-transform: uppercase;
+  background-color: pink;
+  border: none;
+  /* border-radius: 50%; /*round*/
+  border-radius: 8px;
+  padding: 0.5em;
+  margin: 0.3em;
+  text-align: center;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.create-form {
+  margin: 10px;
+  border: 2px solid #95c5ec;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.edit-input {
+  display: inline;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
 }
