@@ -13,7 +13,7 @@ class Tasks extends React.Component {
     super();
     this.state = {
       likes: 1,
-      dislikes: 1,
+      dislikes: 0,
       classLike: false,
       classDislike: false
     };
@@ -29,7 +29,6 @@ class Tasks extends React.Component {
         likes: state.likes - 1,
       }));
     }
-
   };
 
   toggleClassLike = () => {
@@ -39,9 +38,15 @@ class Tasks extends React.Component {
   }
 
   handleDislike = () => {
-    this.setState((state, props) => ({
-      dislikes: state.dislikes - 1
-    }));
+    if (this.state.classDislike === false) {
+      this.setState((state, props) => ({
+        dislikes: state.dislikes + 1,
+      }));
+    } else {
+      this.setState((state, props) => ({
+        dislikes: state.dislikes - 1,
+      }));
+    }
   };
 
   toggleClassDislike = () => {
