@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 class Form extends React.Component {
   constructor() {
@@ -7,23 +8,12 @@ class Form extends React.Component {
       task: "",
       quantity: 1,
       count: 0,
-      date: ""
+      date: moment().format("MM/DD/YYYY")
     };
   }
 
-  componentDidMount() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const day = now.getDate();
-    const date = `${month}/${day}/${year}`;
-    this.setState({
-      date: date
-    });
-  }
 
   handleOnChange = event => {
-    // console.log(event.target.name, event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
       count: event.target.value.length
