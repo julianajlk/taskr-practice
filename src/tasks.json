@@ -4,13 +4,15 @@
       "id": 1,
       "name": "Buy apples",
       "quantity": 3,
-      "date": "10/25/2018"
+      "date": "10/25/2018",
+      "due": "05/02/2019"
     },
     {
       "id": 2,
       "name": "Water suculents",
       "quantity": 1,
-      "date": "10/26/2018"
+      "date": "10/26/2018",
+      "due": "04/23/2019"
     }
   ]
 }

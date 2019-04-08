@@ -8,10 +8,10 @@ class Form extends React.Component {
       task: "",
       quantity: 1,
       count: 0,
-      date: moment().format("MM/DD/YYYY")
+      date: moment().format("MM/DD/YYYY"),
+      due: moment().format("MM/DD/YYYY")
     };
   }
-
 
   handleOnChange = event => {
     this.setState({
@@ -69,7 +69,7 @@ class Form extends React.Component {
             />
           </label>
           <label>
-            Date:
+            Created:
             <input
               type="text"
               name="date"
@@ -77,6 +77,17 @@ class Form extends React.Component {
               onChange={event => this.handleOnChange(event)}
             />
           </label>
+          <label>
+            Due:
+            <input
+              type="text"
+              name="due"
+              value={this.state.due}
+              onChange={event => this.handleOnChange(event)}
+            />
+          </label>
+
+
           <button type="submit">Submit</button>
         </form>
       </div>

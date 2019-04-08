@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const divCardStyle = {
   fontSize: "14px",
@@ -15,9 +16,22 @@ class Tasks extends React.Component {
       likes: 1,
       dislikes: 0,
       classLike: false,
-      classDislike: false
+      classDislike: false,
+      due: ""
     };
   }
+
+  componentDidMount() {
+    let dueArray = this.props.mockData.due.split('/')
+    console.log(dueArray)
+    let dueDate = [dueArray[2], dueArray[0], dueArray[1]].join("")
+    console.log(dueDate)
+    this.setState({
+      due: moment(dueDate, "YYYYMMDD").fromNow()
+    })
+  }
+
+
 
   handleLike = () => {
     if (this.state.classLike === false) {
@@ -62,6 +76,7 @@ class Tasks extends React.Component {
           <h2>{this.props.mockData.name}</h2>
           <p>Qty: {this.props.mockData.quantity}</p>
           <p>Created at: {this.props.mockData.date}</p>
+          <p>Due date: {this.state.due}</p>
           <button onClick={() => this.props.edit()}>Edit</button>
           <button onClick={() => console.log("clicked")}>Delete</button>
           <button
