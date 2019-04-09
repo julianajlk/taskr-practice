@@ -1,5 +1,7 @@
 import React from "react";
 import moment from "moment";
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 class Form extends React.Component {
   constructor() {
@@ -9,8 +11,15 @@ class Form extends React.Component {
       quantity: 1,
       count: 0,
       date: moment().format("MM/DD/YYYY"),
-      due: moment().format("MM/DD/YYYY")
+      due: moment().format("MM/DD/YYYY"),
+      selectedDay: undefined
     };
+  }
+
+  handleDayClick = day => {
+    this.setState({
+      selectedDay: day
+    })
   }
 
   handleOnChange = event => {
@@ -69,15 +78,6 @@ class Form extends React.Component {
             />
           </label>
           <label>
-            Created:
-            <input
-              type="text"
-              name="date"
-              value={this.state.date}
-              onChange={event => this.handleOnChange(event)}
-            />
-          </label>
-          <label>
             Due:
             <input
               type="text"
@@ -86,8 +86,22 @@ class Form extends React.Component {
               onChange={event => this.handleOnChange(event)}
             />
           </label>
-
-
+          <label>
+            Created:
+            <input
+              type="text"
+              name="date"
+              value={this.state.date}
+              onChange={event => this.handleOnChange(event)}
+            />
+          </label>
+          {this.state.selectedDay ? (
+          <p>Your due date is: {this.state.selectedDay.toLocaleDateString()}</p>
+        ) : (
+          <p>Please select a day:</p>
+        )}
+          <DayPicker onDayClick={this.handleDayClick}
+          selectedDays={this.state.selectedDay}/>
           <button type="submit">Submit</button>
         </form>
       </div>

@@ -14,6 +14,7 @@ class EditTask extends React.Component {
     this.state = {
       name: "",
       quantity: "",
+      due: "",
       id: ""
     };
   }
@@ -22,6 +23,7 @@ class EditTask extends React.Component {
     this.setState({
       name: this.props.mockData.name,
       quantity: this.props.mockData.quantity,
+      due: this.props.mockData.due,
       id: this.props.mockData.id
     });
   }
@@ -61,6 +63,16 @@ class EditTask extends React.Component {
                 onChange={event =>
                   this.setState({ quantity: event.target.value })
                 }
+              />
+            </p>
+            <p>
+              Due date:{" "}
+              <input
+                className="edit-input"
+                type="text"
+                name="due"
+                value={this.state.due}
+                onChange={event => this.setState({ name: event.target.value })}
               />
             </p>
             <p>Created at: {this.props.mockData.date}</p>
