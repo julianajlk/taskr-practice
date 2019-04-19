@@ -1,6 +1,11 @@
 import React from "react";
 import moment from "moment";
-import DayPicker from 'react-day-picker';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+import 'moment/locale/it';
 import 'react-day-picker/lib/style.css';
 
 class Form extends React.Component {
@@ -11,12 +16,17 @@ class Form extends React.Component {
       quantity: 1,
       count: 0,
       date: moment().format("MM/DD/YYYY"),
-      due: moment().format("MM/DD/YYYY"),
       selectedDay: undefined
     };
   }
 
-  handleDayClick = day => {
+  handleDayClick = (day, {selected}) => {
+    //check if date has been selected or not
+    if (selected) {
+      // Unselect the day if already selected
+      this.setState({ selectedDay: undefined });
+      return;
+    }
     this.setState({
       selectedDay: day
     })
@@ -78,15 +88,6 @@ class Form extends React.Component {
             />
           </label>
           <label>
-            Due:
-            <input
-              type="text"
-              name="due"
-              value={this.state.due}
-              onChange={event => this.handleOnChange(event)}
-            />
-          </label>
-          <label>
             Created:
             <input
               type="text"
@@ -95,13 +96,15 @@ class Form extends React.Component {
               onChange={event => this.handleOnChange(event)}
             />
           </label>
-          {this.state.selectedDay ? (
-          <p>Your due date is: {this.state.selectedDay.toLocaleDateString()}</p>
-        ) : (
-          <p>Please select a day:</p>
-        )}
-          <DayPicker onDayClick={this.handleDayClick}
-          selectedDays={this.state.selectedDay}/>
+          {this.state.selectedDay && <p>Due: {this.state.selectedDay.toLocaleDateString()}</p>}
+       {!this.state.selectedDay && <p>Select a due date:</p>}
+       <DayPickerInput
+        onDayChange={this.handleDayClick}
+        formatDate={formatDate}
+        parseDate={parseDate}
+        placeholder={`${formatDate(new Date())}`} 
+       />
+
           <button type="submit">Submit</button>
         </form>
       </div>

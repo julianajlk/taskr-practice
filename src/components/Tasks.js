@@ -29,6 +29,7 @@ class Tasks extends React.Component {
     this.setState({
       due: moment(dueDate, "YYYYMMDD").fromNow()
     })
+    console.log(this.state.due)
   }
 
 
