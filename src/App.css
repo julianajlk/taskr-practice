@@ -42,6 +42,7 @@ button {
 
 input {
   display: block;
+  color: gray;
   margin-bottom: 10px;
   width: 200px;
 }

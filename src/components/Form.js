@@ -5,7 +5,6 @@ import MomentLocaleUtils, {
   formatDate,
   parseDate,
 } from 'react-day-picker/moment';
-import 'moment/locale/it';
 import 'react-day-picker/lib/style.css';
 
 class Form extends React.Component {
@@ -21,6 +20,8 @@ class Form extends React.Component {
   }
 
   handleDayClick = (day, {selected}) => {
+    //format day
+    let formatedDay = moment(day).format('L')
     //check if date has been selected or not
     if (selected) {
       // Unselect the day if already selected
@@ -28,7 +29,7 @@ class Form extends React.Component {
       return;
     }
     this.setState({
-      selectedDay: day
+      selectedDay: formatedDay
     })
   }
 
@@ -41,24 +42,32 @@ class Form extends React.Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    if (this.state.task && this.state.quantity && this.state.date) {
-      alert("Task submitted: " + this.state.task);
+    if (this.state.task && this.state.quantity && this.state.date && this.state.selectedDay) {
       console.log(this.state);
-      // this.sendFormData(this.state);
-      // fetch('the server URL', {
-      //   method: "POST",
-      //   headers: {
-      //     'Content-Type: application/json'
-      //   },
-      //   body: JSON.stringify(this.state)
-      // })
+      let data = {name: this.state.task, quantity: this.state.quantity, date: this.state.date, due: this.state.selectedDay}
+      console.log(data)
+      fetch(`http://localhost:3000/tasks`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => response.json())
+      .then(jsonData => {
+        console.log(jsonData)
+      })
     } else {
       alert("You must fill in the entire form");
     }
     this.setState({
-      task: ""
+      task: "",
+      quantity: 1,
+      count: 0,
+      selectedDay: undefined
     });
-    // event.target.reset();
+    event.target.reset();
   };
 
   render() {
@@ -96,13 +105,13 @@ class Form extends React.Component {
               onChange={event => this.handleOnChange(event)}
             />
           </label>
-          {this.state.selectedDay && <p>Due: {this.state.selectedDay.toLocaleDateString()}</p>}
-       {!this.state.selectedDay && <p>Select a due date:</p>}
+       Due date: <br/>
        <DayPickerInput
         onDayChange={this.handleDayClick}
         formatDate={formatDate}
         parseDate={parseDate}
-        placeholder={`${formatDate(new Date())}`} 
+        placeholder={`Click to select a day`}
+        // placeholder={`${formatDate(new Date())}`}
        />
 
           <button type="submit">Submit</button>
