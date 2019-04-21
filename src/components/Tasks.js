@@ -13,6 +13,7 @@ class Tasks extends React.Component {
   constructor() {
     super();
     this.state = {
+      data: "",
       likes: 1,
       dislikes: 0,
       classLike: false,
@@ -22,14 +23,17 @@ class Tasks extends React.Component {
   }
 
   componentDidMount() {
-    let dueArray = this.props.mockData.due.split('/')
-    console.log(dueArray)
-    let dueDate = [dueArray[2], dueArray[0], dueArray[1]].join("")
-    console.log(dueDate)
-    console.log(moment(dueDate, "YYYYMMDD").fromNow())
+    if (this.props.mockData.due) {
+      let dueArray = this.props.mockData.due.split('/')
+      let dueDate = [dueArray[2], dueArray[0], dueArray[1]].join("")
+      this.setState({
+        due: moment(dueDate, "YYYYMMDD").fromNow()
+      })
+    }
     this.setState({
-      due: moment(dueDate, "YYYYMMDD").fromNow()
+      data: this.props.mockData
     })
+
   }
 
   handleLike = (event) => {
@@ -69,6 +73,14 @@ class Tasks extends React.Component {
     }));
   }
 
+  //not functioning yet
+  handleDelete = (id) => {
+    fetch(`http://localhost:3000/tasks/${id}`, {
+      method: "DELETE"
+    })
+  //   .then(r => this.props.history.push(`/`));
+  }
+
 
   render() {
     return (
@@ -92,7 +104,7 @@ class Tasks extends React.Component {
           <p>Created at: {this.props.mockData.date}</p>
           <p>Due date: {this.state.due}</p>
           <button onClick={() => this.props.edit()}>Edit</button>
-          <button onClick={() => console.log("clicked")}>Delete</button>
+          <button onClick={() => this.handleDelete(this.props.mockData.id)}>Delete</button>
 
           <style>{`
                     .like-button {

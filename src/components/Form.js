@@ -20,6 +20,7 @@ class Form extends React.Component {
   }
 
   handleDayClick = (day, {selected}) => {
+    console.log(day)
     //format day
     let formatedDay = moment(day).format('L')
     //check if date has been selected or not
@@ -40,6 +41,7 @@ class Form extends React.Component {
     });
   };
 
+  //not functioning yet
   handleOnSubmit = event => {
     event.preventDefault();
     if (this.state.task && this.state.quantity && this.state.date && this.state.selectedDay) {
@@ -105,13 +107,14 @@ class Form extends React.Component {
               onChange={event => this.handleOnChange(event)}
             />
           </label>
+
+
        Due date: <br/>
        <DayPickerInput
         onDayChange={this.handleDayClick}
         formatDate={formatDate}
         parseDate={parseDate}
         placeholder={`Click to select a day`}
-        // placeholder={`${formatDate(new Date())}`}
        />
 
           <button type="submit">Submit</button>
