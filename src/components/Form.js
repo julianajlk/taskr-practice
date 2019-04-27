@@ -36,7 +36,6 @@ class Form extends React.Component {
   }
 
   handleOnChange = event => {
-    console.log("checkboxed!", event.target.name)
     this.setState({
       [event.target.name]: event.target.value,
       count: event.target.value.length
