@@ -15,7 +15,8 @@ class Form extends React.Component {
       quantity: 1,
       count: 0,
       date: moment().format("MM/DD/YYYY"),
-      selectedDay: undefined
+      selectedDay: undefined,
+      isPriority: false
     };
   }
 
@@ -35,11 +36,18 @@ class Form extends React.Component {
   }
 
   handleOnChange = event => {
+    console.log("checkboxed!", event.target.name)
     this.setState({
       [event.target.name]: event.target.value,
       count: event.target.value.length
     });
   };
+
+  handleCheckbox = event => {
+    this.setState({
+      isPriority: !this.state.isPriority
+    })
+  }
 
   //not functioning yet
   handleOnSubmit = event => {
@@ -109,13 +117,23 @@ class Form extends React.Component {
           </label>
 
 
-       Due date: <br/>
-       <DayPickerInput
-        onDayChange={this.handleDayClick}
-        formatDate={formatDate}
-        parseDate={parseDate}
-        placeholder={`Click to select a day`}
-       />
+          Due date: <br/>
+          <DayPickerInput
+            onDayChange={this.handleDayClick}
+            formatDate={formatDate}
+            parseDate={parseDate}
+            placeholder={`Click to select a day`}
+          />
+
+          <div>
+            <p>Is this a priority?</p>
+            <input type="checkbox" id="yes" name="yes" onClick={this.handleCheckbox}/>
+            <label for="yes">Yes</label>
+         </div>
+
+         <div>
+
+         </div>
 
           <button type="submit">Submit</button>
         </form>
